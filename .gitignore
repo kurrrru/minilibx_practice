@@ -1,0 +1,7 @@
+.vscode/
+minilibx-linux/
+a.out
+main.out
+mlx-test
+*.o
+*.a
