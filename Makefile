@@ -1,5 +1,5 @@
 NAME		=	a.out
-SRCS		=	main.c
+SRCS		=	main.c draw_line.c
 OBJS		=	$(SRCS:.c=.o)
 
 # Libft

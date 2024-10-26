@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkawaguc <nkawaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: nkawaguc <nkawaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:09:43 by nkawaguc          #+#    #+#             */
-/*   Updated: 2024/10/24 14:41:21 by nkawaguc         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:31:19 by nkawaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-#define WIN_WIDTH 500
-#define WIN_HEIGHT 500
-
-typedef struct	s_data
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-}				t_data;
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -74,13 +64,15 @@ int	main(void)
 	int bpp;
 	int endian;
 	img_data = (int *)mlx_get_data_addr(data.img, &bpp, &size_line, &endian);
-	for (int y = 0; y < WIN_HEIGHT; y++)
-	{
-		for (int x = 0; x < WIN_WIDTH; x++)
-		{
-			img_data[y * WIN_WIDTH + x] = x % 256 * 0x10000 + y % 256 * 0x100;
-		}
-	}
+	printf("bpp: %d\n", bpp);
+	printf("size_line: %d\n", size_line);
+	printf("endian: %d\n", endian);
+	t_point p1 = {100, 100, (t_color){0, 255, 0, 0}};
+	t_point p2 = {200, 100, (t_color){0, 0, 255, 0}};
+	t_point p3 = {150, 200, (t_color){0, 0, 0, 255}};
+	draw_line(&data, p1, p2, img_data);
+	draw_line(&data, p2, p3, img_data);
+	draw_line(&data, p3, p1, img_data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 
 
